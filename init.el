@@ -9,6 +9,7 @@
 ;; * C/C++
 ;; * Python
 ;; * lisp
+;; * javascript
 
 ;;; Code:
 
@@ -62,6 +63,7 @@
 (require 'init-auto-complete)
 (require 'init-mmm)
 (require 'init-markdown)
+(require 'init-javascript)
 (require 'init-org)
 (require 'init-python-mode)
 (require 'init-cc-mode)
