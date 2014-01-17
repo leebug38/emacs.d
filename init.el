@@ -9,7 +9,6 @@
 ;; * C/C++
 ;; * Python
 ;; * lisp
-;; * javascript
 
 ;;; Code:
 
@@ -35,11 +34,15 @@
 ;; 设置package软件源。
 (require 'init-elpa)
 
+;; 设置主题包，字体
+(require 'init-themes)
+(require 'init-fonts)
+
 ;;----------------------------------------------------------------
 ;; 下面这些扩展让emacs更容易使用。
 ;;----------------------------------------------------------------
 
-(require-package 'diminish)
+;;(require-package 'diminish)
 (require-package 'scratch)
 
 ;; 记住以往输入过的历史命令。
@@ -56,22 +59,25 @@
 (require 'init-isearch)
 (require 'init-uniquify)
 (require 'init-ibuffer)
-(require 'init-flycheck)
+(require 'init-flymake)
 (require 'init-ido)
 (require 'init-undo-tree)
 (require 'init-hippie-expand)
+;;(require 'init-yasnippet)
 (require 'init-auto-complete)
 (require 'init-mmm)
 (require 'init-markdown)
-(require 'init-javascript)
 (require 'init-org)
 (require 'init-python-mode)
 (require 'init-cc-mode)
-;(require 'init-go-mode)
+(require 'init-javascript)
 (require 'init-sql)
 (require 'init-paredit)
-;(require 'init-lisp)
-;(require 'init-common-lisp)
+(require 'init-lisp)
+(require 'init-common-lisp)
+
+(require 'init-ace-jump-mode)
+
 (when *is-a-mac*
   (require-package 'osx-location))
 (require-package 'regex-tool)

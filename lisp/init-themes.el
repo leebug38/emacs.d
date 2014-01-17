@@ -1,80 +1,65 @@
-;;; init-themes.el --- Set color theme
-
-;;; Commentary:
-;;  Copy from purcell's emacs.d
-
-;;; Code:
-
-(require-package 'color-theme-sanityinc-solarized)
-(require-package 'color-theme-sanityinc-tomorrow)
-
-;;------------------------------------------------------------------------------
-;; Old-style color theming support (via color-theme.el)
-;;------------------------------------------------------------------------------
-(defcustom window-system-color-theme 'color-theme-sanityinc-tomorrow-night
-  "Color theme to use in window-system frames.
-If Emacs' native theme support is available, this setting is
-ignored: use `custom-enabled-themes' instead."
-  :type 'symbol)
-
-(defcustom tty-color-theme 'color-theme-terminal
-  "Color theme to use in TTY frames.
-If Emacs' native theme support is available, this setting is
-ignored: use `custom-enabled-themes' instead."
-  :type 'symbol)
-
-(unless (boundp 'custom-enabled-themes)
-  (defun color-theme-terminal ()
-    (interactive)
-    (color-theme-sanityinc-solarized-dark))
-
-  (defun apply-best-color-theme-for-frame-type (frame)
-    (with-selected-frame frame
-      (funcall (if window-system
-                   window-system-color-theme
-                 tty-color-theme))))
-
-  (defun reapply-color-themes ()
-    (interactive)
-    (mapcar 'apply-best-color-theme-for-frame-type (frame-list)))
-
-  (set-variable 'color-theme-is-global nil)
-  (add-hook 'after-make-frame-functions 'apply-best-color-theme-for-frame-type)
-  (add-hook 'after-init-hook 'reapply-color-themes)
-  (apply-best-color-theme-for-frame-type (selected-frame)))
+;;; my-themes.el ---
+;;
+;; Author: Hua Liang[Stupid ET] <et@everet.org>
+;; Time-stamp: <2013-08-02 15:48:35 Friday by Hua Liang>
 
 
-;;------------------------------------------------------------------------------
-;; New-style theme support, in which per-frame theming is not possible
-;;------------------------------------------------------------------------------
+;;==================== color theme ====================
+(add-to-list 'load-path "~/.emacs.d/themes/color-theme-6.6.0/")
+(require 'color-theme)
+(load-file "~/.emacs.d/themes/color-theme-6.6.0/themes/color-theme-library.el")
 
-;; If you don't customize it, this is the theme you get.
-(setq-default custom-enabled-themes '(sanityinc-solarized-light))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/zenburn-emacs")
 
-;; Ensure that themes will be applied even if they have not been customized
-(defun reapply-themes ()
-  "Forcibly load the themes listed in `custom-enabled-themes'."
-  (dolist (theme custom-enabled-themes)
-    (unless (custom-theme-p theme)
-      (load-theme theme)))
-  (custom-set-variables `(custom-enabled-themes (quote ,custom-enabled-themes))))
+;; change font key bindings
+(defun change-my-theme (theme-num)
+  (save-excursion
+    (progn
+      (let ((origin-buffer (current-buffer)))
+      (find-file "~/.emacs.d/themes/my-themes.el")
+      (goto-char 0)
+      (while (search-forward-regexp "^(set-theme [0-9]+)" nil t)
+        (save-restriction
+          (narrow-to-region (match-beginning 0) (match-end 0))
+          (replace-match (format "(set-theme %d)" theme-num))
+          (eval-region (region-beginning) (region-end))
+          )
+        )
+      (save-buffer)
+      (switch-to-buffer origin-buffer)
+      ))))
 
-(add-hook 'after-init-hook 'reapply-themes)
+(setq my-theme-list '((1 . color-theme-taylor-et)
+                      (2 . (lambda () (load-theme 'tango t)))
+                      (3 . (lambda () (load-theme 'zenburn t)))
+                      (4 . (lambda () (load-theme 'Amelie t)))
+                      ))
+
+(dolist (item my-theme-list)
+  (let ((theme-num (car item)))
+    (global-set-key (kbd (format "C-c , t %d" theme-num))
+                    `(lambda ()
+                       (interactive)
+                       (change-my-theme ,theme-num)))))
+
+(defun set-theme (what-theme)
+  (funcall (cdr (assoc what-theme my-theme-list))))
+
+;; set theme according to theme number
+(set-theme 4)
+;; end
+
+;; solarized
+;(add-to-list 'load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+;(require 'color-theme-solarized)
+;(load-theme 'solarized-light t)
+
+;;-------------------- color theme --------------------
 
 
-;;------------------------------------------------------------------------------
-;; Toggle between light and dark
-;;------------------------------------------------------------------------------
-(defun light ()
-  "Activate a light color theme."
-  (interactive)
-  (color-theme-sanityinc-solarized-light))
-
-(defun dark ()
-  "Activate a dark color theme."
-  (interactive)
-  (color-theme-sanityinc-solarized-dark))
 
 
 (provide 'init-themes)
-;;; init-themes ends here
+
+;;; my-themes.el ends here
