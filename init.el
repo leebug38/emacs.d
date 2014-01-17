@@ -12,6 +12,8 @@
 
 ;;; Code:
 
+(setq *xemacs* (featurep 'xemacs) )
+(setq *emacs24* (and (not *xemacs*) (or (>= emacs-major-version 24))) )
 ;;----------------------------------------------------------------
 ;; 设置自己的lisp载入路径.
 ;;----------------------------------------------------------------
@@ -62,6 +64,7 @@
 (require 'init-flymake)
 (require 'init-ido)
 (require 'init-undo-tree)
+(if *emacs24* (require 'init-helm))
 (require 'init-hippie-expand)
 ;;(require 'init-yasnippet)
 (require 'init-auto-complete)
