@@ -120,7 +120,8 @@ point reaches the beginning or end of the buffer, stop there."
 ;;----------------------------------------------------------------------
 ;; 删除整行
 (global-set-key (kbd "C-'") 'kill-whole-line)
-
+;; 注释掉整行
+(global-set-key (kbd "M-'") 'whole-line-or-region-comment-dwim)
 
 
 

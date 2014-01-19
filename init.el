@@ -56,7 +56,6 @@
 ;;----------------------------------------------------------------
 
 (require 'init-editing-utils)
-(require 'init-themes)
 (require 'init-dired)
 (require 'init-isearch)
 (require 'init-uniquify)
@@ -66,7 +65,7 @@
 (require 'init-undo-tree)
 (if *emacs24* (require 'init-helm))
 (require 'init-hippie-expand)
-;;(require 'init-yasnippet)
+(require 'init-yasnippet)
 (require 'init-auto-complete)
 (require 'init-mmm)
 (require 'init-markdown)
@@ -74,6 +73,7 @@
 (require 'init-python-mode)
 (require 'init-cc-mode)
 (require 'init-javascript)
+(require 'init-web-mode)
 (require 'init-sql)
 (require 'init-paredit)
 (require 'init-lisp)
