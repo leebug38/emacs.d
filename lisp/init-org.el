@@ -5,6 +5,10 @@
   (require-package 'org-mac-link)
   (require-package 'org-mac-iCal))
 
+(setq org-agenda-files (list "/home/leebug/documents/org/work.org"
+                        "/home/leebug/documents/org/school.org"
+                        "/home/leebug/documents/org/home.org"))
+(require 'init-flymake)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)

@@ -79,15 +79,15 @@
          (dired-directory dired-directory "%b")))) 
 ;;------------------------------------------------------------------
 ;; 启动emacs时窗口最大化  
-;(defun my-maximized () 
-; (interactive)  
-; (x-send-client-message  
-;  nil 0 nil "_NET_WM_STATE" 32  
-;  '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))  
-; (x-send-client-message  
-;  nil 0 nil "_NET_WM_STATE" 32  
-;  '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))  
-;(my-maximized)  
+(defun my-maximized () 
+ (interactive)  
+ (x-send-client-message  
+  nil 0 nil "_NET_WM_STATE" 32  
+  '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))  
+ (x-send-client-message  
+  nil 0 nil "_NET_WM_STATE" 32  
+  '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))  
+(my-maximized)  
 ;;-------------------------------------------------------------------
 ;; 设置C-a移动更为智能
 ;; { smarter navigation to the beginning of a line
@@ -122,9 +122,12 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key (kbd "C-'") 'kill-whole-line)
 ;; 注释掉整行
 (global-set-key (kbd "M-'") 'whole-line-or-region-comment-dwim)
+<<<<<<< HEAD
 ;; 为了切换拼音
 (global-unset-key (kbd "C-SPC"))
 ;;----------------------------------------------------------------------
+=======
+>>>>>>> remotes/origin/master
 
 
 

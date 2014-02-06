@@ -37,7 +37,7 @@
 (require 'init-elpa)
 
 ;; 设置主题包，字体
-;(require 'init-themes)
+(require 'init-themes)
 (require 'init-fonts)
 
 ;;----------------------------------------------------------------
