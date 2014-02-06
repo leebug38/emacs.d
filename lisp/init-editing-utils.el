@@ -122,14 +122,9 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key (kbd "C-'") 'kill-whole-line)
 ;; 注释掉整行
 (global-set-key (kbd "M-'") 'whole-line-or-region-comment-dwim)
-<<<<<<< HEAD
 ;; 为了切换拼音
 (global-unset-key (kbd "C-SPC"))
 ;;----------------------------------------------------------------------
-=======
->>>>>>> remotes/origin/master
-
-
 
 (require-package 'whitespace-cleanup-mode)
 (global-whitespace-cleanup-mode t)
